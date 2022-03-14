@@ -15,4 +15,4 @@ docker run -d   --name weibohot-31000 -p 31000:31000   weibohot
 ## todo
 1. 根据查询情况，给表加索引（node列）
 2. 选用es作为数据库
-3. 静态资源上cdn
+3. 静态资源上cdn(后续考虑)

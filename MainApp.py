@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template, jsonify,abort
+from flask import Flask, render_template, jsonify
 from flask_apscheduler import APScheduler
 from OperacteData import DataJson, DataShow, DailyReport, AutoCreateTable
 import json
@@ -45,7 +45,8 @@ def dataJson(SelectTime):
 @app.route('/weibo/<SelectTime>')
 def dataShow(SelectTime):
     if SelectTime < '20220315' or datetime.datetime.strptime(SelectTime, "%Y%m%d") > datetime.datetime.today():
-        abort(404) 
+        return render_template('error.html')
+
     else:
         ColorJson = DataShow(SelectTime)
         return render_template('race.html', SelectTime=SelectTime, ColorJson=json.dumps(ColorJson))
@@ -54,7 +55,8 @@ def dataShow(SelectTime):
 @app.route('/weibo/report/<SelectTime>')
 def dailyReport(SelectTime):
     if SelectTime < '20220315' or datetime.datetime.strptime(SelectTime, "%Y%m%d") > datetime.datetime.today():
-        abort(404) 
+        return render_template('error.html')
+
     else:
         DailyReportList = DailyReport(SelectTime)
 

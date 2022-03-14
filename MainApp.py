@@ -44,7 +44,7 @@ def dataJson(SelectTime):
 
 @app.route('/weibo/<SelectTime>')
 def dataShow(SelectTime):
-    if SelectTime < '20220315' or datetime.datetime.strptime(SelectTime, "%Y%m%d") > datetime.datetime.today():
+    if 1==2: #SelectTime < '20220315' or datetime.datetime.strptime(SelectTime, "%Y%m%d") > datetime.datetime.today():
         return 'error date'
     else:
         ColorJson = DataShow(SelectTime)
@@ -53,7 +53,7 @@ def dataShow(SelectTime):
 
 @app.route('/weibo/report/<SelectTime>')
 def dailyReport(SelectTime):
-    if SelectTime < '20220315' or datetime.datetime.strptime(SelectTime, "%Y%m%d") > datetime.datetime.today():
+    if 1==2: #SelectTime < '20220315' or datetime.datetime.strptime(SelectTime, "%Y%m%d") > datetime.datetime.today():
         return 'error date'
     else:
         DailyReportList = DailyReport(SelectTime)

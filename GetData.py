@@ -26,7 +26,7 @@ def GetData():
     chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_options.add_argument('--headless')
     browser = webdriver.Chrome(
-        chrome_options=chrome_options, executable_path="/usr/local/bin/98.0.4758")
+        chrome_options=chrome_options, executable_path="/usr/local/bin/chromedriver")
     # /usr/local/bin/chromedriver
     try:
         browser.get(url)

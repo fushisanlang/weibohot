@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+
+    <title>{{ SelectTime }} 微博热搜数量统计</title>
+
+    <style>
+        #customers {
+          font-family: Arial, Helvetica, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        #customers td, #customers th {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+        
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+        
+        #customers tr:hover {background-color: #ddd;}
+        
+        #customers th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+       
+          background-color: black;
+          color: white;
+        }
+        h3 {
+            text-align: center;
+        }
+        </style>
+
+</head>
+<body>
+    <H3>{{ SelectTime }} 微博热搜数量统计</H3>
+
+<table id="customers">
+    <tr>
+        <th align="center"> 内容 </th>
+        <th align="center"> 次数 </th>		
+    </tr> 
+    
+    
+ {% for DailyReportnode in DailyReportList %}
+<tr>
+ <td align="center">  <a href="https://s.weibo.com/weibo?q=%23{{ DailyReportnode[0] }}&from=trendtop_api&refer=index_hot_new"> {{ DailyReportnode[0] }}  </a> </td>
+ <td align="center"> {{ DailyReportnode[1] }} </td>
+</tr> {% endfor %}
+
+</table>
+</body>

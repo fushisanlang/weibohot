@@ -14,7 +14,7 @@ class Config:
             'id': 'GetData',
             'func': GetData,
             'trigger': 'cron',
-            'minute': '*',
+            'minute': '*/5',
         },
         {
             'id': 'AutoCreateTable',

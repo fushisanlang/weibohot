@@ -37,7 +37,7 @@ def wordPic(SelectTime):
         # 添加遮罩层
         mask=mask,
         # 生成中文字的字体,必须要加,不然看不到中文
-        font_path="/System/Library/Fonts/STHeiti Light.ttc"
+        font_path="templates/1.ttc"
     ).generate(text)
     image_produce = wordcloud.to_image()
     image_produce.save("pics/" + SelectTime + ".png")

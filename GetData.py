@@ -38,7 +38,7 @@ def GetData():
     except:
         Alert("微博热搜网址异常")
     else:
-        time.sleep(15)
+        time.sleep(30)
         xpath = '//*[@id="pl_top_realtimehot"]/table/tbody/tr'
         elems = browser.find_elements_by_xpath(xpath)
 

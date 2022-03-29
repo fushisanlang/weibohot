@@ -45,5 +45,5 @@ def wordPic(SelectTime):
 def WordPic():
     todayDate = datetime.datetime.now()
     yesterdayDate=todayDate-datetime.timedelta(days=1)
-    yesterdayDateStr=yesterdayDate.strftime("%Y-%m-%d")
+    yesterdayDateStr=yesterdayDate.strftime("%Y%m%d")
     wordPic(yesterdayDateStr)

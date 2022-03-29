@@ -5,7 +5,7 @@ from OperacteData import DataJson, DataShow, DailyReport, AutoCreateTable
 import json
 import datetime
 from GetData import GetData
-
+from WordPic import WordPic
 
 class Config:
 
@@ -21,6 +21,14 @@ class Config:
             'func': AutoCreateTable,
             'trigger': 'cron',
             'month': '*',
+        },
+                {
+            'id': 'WordPic',
+            'func': WordPic,
+            'trigger': 'cron',
+            'hour': '0',
+            'minute': 17,
+
         },
     ]
 
@@ -62,9 +70,9 @@ def dailyReport(SelectTime):
 
         return render_template('report.html', SelectTime=SelectTime, DailyReportList=DailyReportList)
 
-
 scheduler = APScheduler()
 app.config.from_object(Config())
 scheduler.init_app(app)
 scheduler.start()
 app.run(debug=False, host='0.0.0.0', port=31000)
+

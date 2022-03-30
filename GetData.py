@@ -17,6 +17,7 @@ def doNothing():
 
 
 def GetData():
+    getTime=0
     month = datetime.datetime.now().strftime('%Y%m')
     InsertSql = "INSERT INTO `weibohot`.weibohot_" + month + " ( `node`, `hot_num`) VALUES "
     url = 'https://s.weibo.com/top/summary?cate=realtimehot'
@@ -33,30 +34,36 @@ def GetData():
     browser = webdriver.Chrome(
         chrome_options=chrome_options, executable_path="/usr/local/bin/chromedriver")
     # /usr/local/bin/chromedriver
-    try:
-        browser.get(url)
-    except:
-        Alert("微博热搜网址异常")
-    else:
-        time.sleep(30)
-        xpath = '//*[@id="pl_top_realtimehot"]/table/tbody/tr'
-        elems = browser.find_elements_by_xpath(xpath)
+    while  True:
+        if getTime > 5:
+            Alert('微博热搜搜集异常')
+            break
+        getTime=getTime+1
+        try:
+            browser.get(url)
+        except:
+            Alert("微博热搜网址异常")
+        else:
 
-        for elem in elems:
-            try:
-                int(elem.find_element_by_class_name('td-01').text)
-            except:
-                doNothing()
-            else:
-                info = elem.find_element_by_class_name('td-02').text
-                title = info.split(' ')[0]
-                num = info.split(' ')[-1]
-                InsertSql = InsertSql + '(\'' + title + '\',' + num + '),'
-        InsertSql = re.sub(r',$', ';', InsertSql)
-        browser.quit()
-    if InsertSql == "INSERT INTO `weibohot`.weibohot_" + month + " ( `node`, `hot_num`) VALUES ":
-        Alert('微博热搜搜集异常')
-    else:
-        InsertOperaction(InsertSql)
-    
+            time.sleep(10)
+            xpath = '//*[@id="pl_top_realtimehot"]/table/tbody/tr'
+            elems = browser.find_elements_by_xpath(xpath)
+
+            for elem in elems:
+                try:
+                    int(elem.find_element_by_class_name('td-01').text)
+                except:
+                    doNothing()
+                else:
+                    info = elem.find_element_by_class_name('td-02').text
+                    title = info.split(' ')[0]
+                    num = info.split(' ')[-1]
+                    InsertSql = InsertSql + '(\'' + title + '\',' + num + '),'
+            InsertSql = re.sub(r',$', ';', InsertSql)
+        
+        if InsertSql != "INSERT INTO `weibohot`.weibohot_" + month + " ( `node`, `hot_num`) VALUES ":
+ 
+            InsertOperaction(InsertSql)
+            break
+    browser.quit()
     return InsertSql
